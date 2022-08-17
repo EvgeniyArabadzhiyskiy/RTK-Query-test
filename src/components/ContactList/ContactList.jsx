@@ -10,6 +10,8 @@ import { Box } from '../Box/Box';
 
 const ContactList = ({ filter }) => {
   const { data: contacts = [] } = useGetAllContactsQuery();
+  console.log("ContactList ~ contacts", contacts);
+  
   const [deleteContact] = useDeleteContactMutation();
   const [toggleFaforit] = useToggleFavoritesMutation();
 
