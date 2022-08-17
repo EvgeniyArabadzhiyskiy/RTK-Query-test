@@ -40,7 +40,7 @@ const PhoneForm = () => {
   } = useForm({ resolver: yupResolver(contactShema) });
 
   const submitForm = ({ name, number }, evt) => {
-    const foundName = contacts.find(contact => contact.name === name);
+    const foundName = contacts?.find(contact => contact.name === name);
     if (foundName) {
       toast.error(`${name} is alredy in contacts`, {
         position: 'top-right',
