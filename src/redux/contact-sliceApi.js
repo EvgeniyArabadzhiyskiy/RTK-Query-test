@@ -4,7 +4,20 @@ export const contactAPI = createApi({
   reducerPath: 'contactApi',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://62e65af1de23e263792af968.mockapi.io/api/stars-numbers',
+    baseUrl: 'https://connections-api.herokuapp.com',
+
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      console.log("token", token);
+      
+      // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZjZTc0MmVhNzE3YzAwMTVjZWI5NjciLCJpYXQiOjE2NjA3NDE0NDJ9.PoUjyR6yZocGH4TZwrKCPDBv7pB4aRp1rszyyE8WnLg'
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
 
   tagTypes: ['Contact'],
