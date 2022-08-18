@@ -10,14 +10,17 @@ import FilterContacts from 'components/FilterContacts/FilterContacts';
 import RegisterForm from 'components/RegisterForm/RegisterForm';
 import LoginForm from 'components/LoginForm/LoginForm';
 import UserMenu from 'components/UserMenu/UserMenu';
-import { useSelector } from 'react-redux';
-import authSelectors from 'redux/auth/auth-selectors';
+// import { useSelector } from 'react-redux';
+// import authSelectors from 'redux/auth/auth-selectors';
 
 const App = () => {
+  const [isLoggedIn, setIsLogIn] = useState(false);
+  const [name, setName] = useState(null);
   const [count, setCount] = useState(0);
   const [filter, setFilter] = useState('');
 
-  const isLoggedIn = useSelector(authSelectors.getIsLOggedIn);
+  // const isLoggedIn = useSelector(authSelectors.getIsLOggedIn);
+  // console.log("App ~ isLoggedIn", isLoggedIn);
 
   const changeInput = evt => {
     setFilter(evt.target.value);
@@ -27,8 +30,12 @@ const App = () => {
     <div>
       <Container>
         <RegisterForm />
-        <LoginForm />
-        <UserMenu />
+        <LoginForm
+         setIsLogIn={setIsLogIn} setName={setName} 
+         />
+        <UserMenu
+          setIsLogIn={setIsLogIn} setName={setName} name={name}
+          />
         <Section title="Phonebook">
         {isLoggedIn && <PhoneForm />}
         </Section>
