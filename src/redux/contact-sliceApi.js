@@ -8,7 +8,6 @@ export const contactAPI = createApi({
 
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
-      console.log("token", token);
       
       // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZjZTc0MmVhNzE3YzAwMTVjZWI5NjciLCJpYXQiOjE2NjA3NDE0NDJ9.PoUjyR6yZocGH4TZwrKCPDBv7pB4aRp1rszyyE8WnLg'
 
