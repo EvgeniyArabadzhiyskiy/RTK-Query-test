@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { token } from 'components/LoginForm/LoginForm';
+
 
 export const contactAPI = createApi({
   reducerPath: 'contactApi',
@@ -7,9 +9,8 @@ export const contactAPI = createApi({
     baseUrl: 'https://connections-api.herokuapp.com',
 
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
-      
-      // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZjZTc0MmVhNzE3YzAwMTVjZWI5NjciLCJpYXQiOjE2NjA3NDE0NDJ9.PoUjyR6yZocGH4TZwrKCPDBv7pB4aRp1rszyyE8WnLg'
+      // const token = getState().auth.token;
+      console.log("token", token);
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -38,9 +39,13 @@ export const contactAPI = createApi({
     }),
 
     toggleFavorites: builder.mutation({
-        query: ( {id, favorites}) => ({url:`/contacts/${id}`, method: 'PUT', body: {favorites}}),
-        invalidatesTags: ['Contact'],
-    })
+      query: ({ id, favorites }) => ({
+        url: `/contacts/${id}`,
+        method: 'PUT',
+        body: { favorites },
+      }),
+      invalidatesTags: ['Contact'],
+    }),
   }),
 });
 
@@ -48,5 +53,5 @@ export const {
   useGetAllContactsQuery,
   useAddContactMutation,
   useDeleteContactMutation,
-  useToggleFavoritesMutation
+  useToggleFavoritesMutation,
 } = contactAPI;
